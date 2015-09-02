@@ -1,11 +1,9 @@
 package acceptance
 
-import com.twitter.finagle.netty3.Ok
 import com.twitter.finatra.http.test.EmbeddedHttpServer
 import com.twitter.inject.server.FeatureTest
 import jensraaby.restbucks.RestbucksServer
-import org.jboss.netty.handler.codec.http.HttpResponseStatus
-import org.scalatest.FunSpec
+import com.twitter.finagle.httpx.Status
 
 
 class IndexFeatureTest extends FeatureTest {
@@ -17,7 +15,7 @@ class IndexFeatureTest extends FeatureTest {
 
     val result = server.httpGet(
       path = "/",
-      andExpect = HttpResponseStatus.OK,
+      andExpect = Status.Ok,
       withBody = "Hello World"
     )
 
