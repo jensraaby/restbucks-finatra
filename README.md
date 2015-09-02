@@ -31,7 +31,6 @@ This is a barebones setup as of August 2015:
 name := "restbucks-finatra"
 version := scala.util.Properties.envOrElse("BUILD_VERSION","dev")
 organization := "jensraaby"
-version := "0.1"
 
 scalaVersion := "2.11.7"
 

@@ -1,7 +1,6 @@
 name := "restbucks-finatra"
 version := scala.util.Properties.envOrElse("BUILD_VERSION","dev")
 organization := "jensraaby"
-version := "0.1"
 
 scalaVersion := "2.11.7"
 
