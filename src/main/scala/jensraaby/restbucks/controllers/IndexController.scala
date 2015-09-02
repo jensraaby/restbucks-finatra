@@ -1,4 +1,4 @@
-package jensraaby.restbucks
+package jensraaby.restbucks.controllers
 
 import com.twitter.finagle.http.Request
 import com.twitter.finatra.http.Controller

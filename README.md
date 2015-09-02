@@ -5,6 +5,14 @@ As most documentation for doing non-trivial things with Finatra is either
 non-existent or a reference to some example code, this is an attempt to go
 through the motions and make notes.
 
+The aim is to get the following working:
+* Scala Guice dependency injection
+* The HttpClient module for contacting remote services
+* Acceptance tests using the EmbeddedHttpServer
+* Mockito for isolating components
+* InMemoryHttpService for mocking remote HTTP services during tests
+* TypeSafe Config for environment-specific configuration
+
 ## Steps
 I'm documenting the steps as I go, because Finatra 2 is slightly lacking in this
 regard and it's a useful reference for myself.
@@ -116,7 +124,7 @@ Manifest[ResponseType]): Unit
 We can ignore the implicits for the time being, as they are more to do with
 ensuring the types can be correctly interpreted for HTTP. 
 
-Note that ```get``` essentially maps a route (e.g. "/hello") with a
+Note that ```get``` essentially maps an HTTP verb (GET) and route (e.g. "/hello") to a
 handler/callback. If you want to unit test the callback, you can extract it to
 its own function so you don't need a server running.
 
