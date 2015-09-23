@@ -6,33 +6,42 @@ scalaVersion := "2.11.7"
 
 resolvers ++= Seq(
   Resolver.sonatypeRepo("releases"),
-  "Twitter Maven" at "https://maven.twttr.com",
-  "Finatra Repo" at "http://twitter.github.com/finatra"
+  "Twitter Maven" at "https://maven.twttr.com"
 )
 
-lazy val finatraVersion = "2.0.0.RC1"
-lazy val finagleVersion = "6.28.0"
+// Make test output quiet unless a test fails:
+// see http://www.scalatest.org/user_guide/using_the_runner
+testOptions in Test += Tests.Argument("-oCOLHPQ")
+javaOptions in Test += "-Dlogback.configurationFile=./src/test/resources/logback-test.xml"
+fork in Test := true
+
+lazy val versions = new {
+  val finatra = "2.0.1"
+  val logbackClassic = "1.1.3"
+  val mockito = "1.9.5"
+  val scalatest = "2.2.4"
+  val specs2 = "2.3.12"
+}
 
 libraryDependencies ++= Seq(
-  "com.twitter.finatra" %% "finatra-http" % finatraVersion,
-  "com.twitter.finatra" %% "finatra-http" % finatraVersion % "test" classifier "tests",
-  "com.twitter.finatra" %% "finatra-httpclient" % finatraVersion,
-  "com.twitter.finatra" %% "finatra-httpclient" % finatraVersion % "test" classifier "tests",
-  "com.twitter.finatra" %% "finatra-slf4j" % finatraVersion,
+  "com.twitter.finatra" %% "finatra-http" % versions.finatra,
+  "com.twitter.finatra" %% "finatra-http" % versions.finatra % "test" classifier "tests",
+  "com.twitter.finatra" %% "finatra-httpclient" % versions.finatra,
+  "com.twitter.finatra" %% "finatra-httpclient" % versions.finatra % "test" classifier "tests",
+  "com.twitter.finatra" %% "finatra-slf4j" % versions.finatra,
 
-  "com.twitter.inject" %% "inject-app" % finatraVersion % "test",
-  "com.twitter.inject" %% "inject-core" % finatraVersion % "test",
-  "com.twitter.inject" %% "inject-modules" % finatraVersion % "test",
-  "com.twitter.inject" %% "inject-server" % finatraVersion % "test",
-  "com.twitter.inject" %% "inject-app" % finatraVersion % "test" classifier "tests",
-  "com.twitter.inject" %% "inject-core" % finatraVersion % "test" classifier "tests",
-  "com.twitter.inject" %% "inject-modules" % finatraVersion % "test" classifier "tests",
-  "com.twitter.inject" %% "inject-server" % finatraVersion % "test" classifier "tests",
+  "com.twitter.inject" %% "inject-app" % versions.finatra % "test",
+  "com.twitter.inject" %% "inject-app" % versions.finatra % "test" classifier "tests",
+  "com.twitter.inject" %% "inject-core" % versions.finatra % "test",
+  "com.twitter.inject" %% "inject-core" % versions.finatra % "test" classifier "tests",
+  "com.twitter.inject" %% "inject-modules" % versions.finatra % "test",
+  "com.twitter.inject" %% "inject-modules" % versions.finatra % "test" classifier "tests",
+  "com.twitter.inject" %% "inject-server" % versions.finatra % "test",
+  "com.twitter.inject" %% "inject-server" % versions.finatra % "test" classifier "tests",
 
-  "ch.qos.logback" % "logback-classic" % "1.1.3",
+  "ch.qos.logback" % "logback-classic" % versions.logbackClassic,
 
-  "org.mockito" % "mockito-core" % "1.9.5" % "test",
-  "org.scalatest" %% "scalatest" % "2.2.4" % "test",
-  "org.specs2" %% "specs2" % "2.3.12" % "test"
+  "org.mockito" % "mockito-core" %  versions.mockito % "test",
+  "org.scalatest" %% "scalatest" % versions.scalatest % "test",
+  "org.specs2" %% "specs2" % versions.specs2 % "test"
 )
-

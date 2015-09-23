@@ -1,14 +1,14 @@
 package acceptance
 
+import com.jensraaby.restbucks.RestbucksServer
 import com.twitter.finatra.http.test.EmbeddedHttpServer
 import com.twitter.inject.server.FeatureTest
-import jensraaby.restbucks.RestbucksServer
 import com.twitter.finagle.httpx.Status
 
 
 class IndexFeatureTest extends FeatureTest {
 
-  override val server = new EmbeddedHttpServer(new RestbucksServer)
+  override val server = new EmbeddedHttpServer(new RestbucksServer, verbose = false)
 
 
   "index root returns hello world" in {

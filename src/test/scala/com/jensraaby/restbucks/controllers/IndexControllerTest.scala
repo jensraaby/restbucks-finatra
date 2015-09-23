@@ -1,4 +1,4 @@
-package jensraaby.restbucks.controllers
+package com.jensraaby.restbucks.controllers
 
 import com.twitter.finagle.httpx.{RequestBuilder, Method}
 import org.scalatest.FunSpec

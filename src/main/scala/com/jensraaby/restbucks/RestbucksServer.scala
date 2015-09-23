@@ -1,9 +1,9 @@
-package jensraaby.restbucks
+package com.jensraaby.restbucks
 
+import com.jensraaby.restbucks.controllers.IndexController
 import com.twitter.finatra.http.HttpServer
 import com.twitter.finatra.http.filters.CommonFilters
 import com.twitter.finatra.http.routing.HttpRouter
-import jensraaby.restbucks.controllers.IndexController
 
 
 object RestbucksServerMain extends RestbucksServer

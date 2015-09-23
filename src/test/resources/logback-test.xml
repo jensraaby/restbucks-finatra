@@ -1,0 +1,17 @@
+<configuration>
+    <!-- Console Appender -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Per Package Config -->
+    <logger name="com.jensraaby" level="ERROR"/>
+    <logger name="com.twitter.app" level="ERROR"/>
+
+    <!-- Root Logger -->
+    <root level="warn">
+        <appender-ref ref="STDOUT"/>
+    </root>
+</configuration>
