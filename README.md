@@ -11,7 +11,7 @@ The aim is to get the following working:
 * InMemoryHttpService for mocking remote HTTP services during tests
 
 ## Steps
-I'm documenting the steps as I go, because Finatra 2 as it's a useful reference for myself.
+I'm documenting the steps as I go, because Finatra 2 is shiny, and it's a useful reference for myself (and maybe you, if you're reading this!).
 
 At this point, all you need is Java 7 or Java 8 installed.
 
