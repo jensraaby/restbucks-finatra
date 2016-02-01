@@ -15,79 +15,6 @@ I'm documenting the steps as I go, because Finatra 2 is shiny, and it's a useful
 
 At this point, all you need is Java 7 or Java 8 installed.
 
-### Create build.sbt
-Finatra 2 has a number of dependencies, and it's useful to set a few options in
-the SBT build file for packaging and running.
-
-I've allowed setting the version dynamically, which can be rather useful when you execute the
-build in CI, but most people would probably choose a version number like "0.1".
-
-This is a barebones setup as of September 2015:
-
-```
-name := "restbucks-finatra"
-version := scala.util.Properties.envOrElse("BUILD_VERSION","dev")
-organization := "jensraaby"
-
-scalaVersion := "2.11.7"
-
-// Make test output quiet unless a test fails:
-// see http://www.scalatest.org/user_guide/using_the_runner
-testOptions in Test += Tests.Argument("-oCOLHPQ")
-
-resolvers ++= Seq(
-  Resolver.sonatypeRepo("releases"),
-  "Twitter Maven" at "https://maven.twttr.com"
-)
-
-lazy val versions = new {
-  val finatra = "2.0.1"
-  val logbackClassic = "1.1.3"
-  val mockito = "1.9.5"
-  val scalatest = "2.2.4"
-  val specs2 = "2.3.12"
-}
-
-libraryDependencies ++= Seq(
-  "com.twitter.finatra" %% "finatra-http" % versions.finatra,
-  "com.twitter.finatra" %% "finatra-http" % versions.finatra % "test" classifier "tests",
-  "com.twitter.finatra" %% "finatra-httpclient" % versions.finatra,
-  "com.twitter.finatra" %% "finatra-httpclient" % versions.finatra % "test" classifier "tests",
-  "com.twitter.finatra" %% "finatra-slf4j" % versions.finatra,
-
-  "com.twitter.inject" %% "inject-app" % versions.finatra % "test",
-  "com.twitter.inject" %% "inject-app" % versions.finatra % "test" classifier "tests",
-  "com.twitter.inject" %% "inject-core" % versions.finatra % "test",
-  "com.twitter.inject" %% "inject-core" % versions.finatra % "test" classifier "tests",
-  "com.twitter.inject" %% "inject-modules" % versions.finatra % "test",
-  "com.twitter.inject" %% "inject-modules" % versions.finatra % "test" classifier "tests",
-  "com.twitter.inject" %% "inject-server" % versions.finatra % "test",
-  "com.twitter.inject" %% "inject-server" % versions.finatra % "test" classifier "tests",
-
-  "ch.qos.logback" % "logback-classic" % versions.logbackClassic,
-
-  "org.mockito" % "mockito-core" %  versions.mockito % "test",
-  "org.scalatest" %% "scalatest" % versions.scalatest % "test",
-  "org.specs2" %% "specs2" % versions.specs2 % "test"
-)
-
-
-```
-I haven't quite worked out why they import Specs2 as well as Scalatest for the
-examples, but if you remove it you get this error:
-```
-[warn] Class org.junit.runner.RunWith not found - continuing with a stub.
-```
-
-At this point, it should be possible to load SBT up and resolve dependencies.
-
-The next part is to set the SBT version, which forces the version specified. This
-goes in "project/build.properties":
-```
-sbt.version=0.13.9
-```
-Note that versions of SBT prior to 0.13.7 required blank lines between every
-statement in build.sbt, which is why you might see lots of spaced-out files.
 
 ### Basic Finatra server
 
@@ -149,9 +76,6 @@ class SomeController extends Controller {
 }
 ```
 
-Note I am not defining a method on the class, but a function. This means I can
-just pass it to the "get" method directly rather than have to fiddle with
-passing arguments.
 
 ### Aside: Making test output quieter
 When you are developing in a test driven way, you will be executing the tests very frequently.

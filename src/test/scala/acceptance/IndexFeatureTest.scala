@@ -11,7 +11,7 @@ class IndexFeatureTest extends FeatureTest {
   override val server = new EmbeddedHttpServer(new RestbucksServer, verbose = false, disableTestLogging = true)
 
 
-  "index root returns hello world" in {
+  "index route returns hello world" in {
 
     val result = server.httpGet(
       path = "/",
