@@ -16,11 +16,12 @@ javaOptions in Test += "-Dlogback.configurationFile=./src/test/resources/logback
 fork in Test := true
 
 lazy val versions = new {
-  val finatra = "2.0.1"
+  val finatra = "2.1.2"
   val logbackClassic = "1.1.3"
   val mockito = "1.9.5"
   val scalatest = "2.2.4"
   val specs2 = "2.3.12"
+  val guice = "4.0"
 }
 
 libraryDependencies ++= Seq(
@@ -38,6 +39,8 @@ libraryDependencies ++= Seq(
   "com.twitter.inject" %% "inject-modules" % versions.finatra % "test" classifier "tests",
   "com.twitter.inject" %% "inject-server" % versions.finatra % "test",
   "com.twitter.inject" %% "inject-server" % versions.finatra % "test" classifier "tests",
+  "com.google.inject.extensions" % "guice-testlib" % versions.guice % "test",
+
 
   "ch.qos.logback" % "logback-classic" % versions.logbackClassic,
 

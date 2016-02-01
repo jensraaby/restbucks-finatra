@@ -1,6 +1,6 @@
 package com.jensraaby.restbucks.controllers
 
-import com.twitter.finagle.httpx.{RequestBuilder, Method}
+import com.twitter.finagle.http.{Method, RequestBuilder}
 import org.scalatest.FunSpec
 
 class IndexControllerTest extends FunSpec {
