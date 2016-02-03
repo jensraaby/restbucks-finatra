@@ -11,7 +11,14 @@ class BbcHeadlineFeatureTest extends FeatureTest {
   "returns headlines from BBC news in JSON" in {
     server.httpGet(path = "/bbc",
       andExpect = Status.Ok,
-      withBody =
-        """{"top_story":{"headline":"Something happened"}}""")
+      withJsonBody =
+        """
+          {
+           "top_story":
+             {
+               "headline":"Something happened"
+             }
+          }
+          """)
   }
 }

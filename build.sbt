@@ -30,6 +30,10 @@ libraryDependencies ++= Seq(
   "com.twitter.finatra" %% "finatra-httpclient" % versions.finatra,
   "com.twitter.finatra" %% "finatra-httpclient" % versions.finatra % "test" classifier "tests",
   "com.twitter.finatra" %% "finatra-slf4j" % versions.finatra,
+  "com.twitter.finatra" %% "finatra-jackson" % versions.finatra % "test",
+  "com.twitter.finatra" %% "finatra-jackson" % versions.finatra % "test" classifier "tests",
+
+
 
   "com.twitter.inject" %% "inject-app" % versions.finatra % "test",
   "com.twitter.inject" %% "inject-app" % versions.finatra % "test" classifier "tests",
