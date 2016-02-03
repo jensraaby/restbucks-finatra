@@ -11,20 +11,37 @@ import com.twitter.inject.server.FeatureTest
 
 class BbcHeadlineFeatureTest extends FeatureTest with HttpMockResponses {
 
+  val headline = "Something happened"
+  val link = "http://somewhere"
+  val bbcNewsHtml =
+    s"""
+      |<div id="comp-top-story-1">
+      | <a href="$link">
+      |   <h3><span>$headline</span></h3>
+      | </a>
+      |</div>
+    """.stripMargin
+
+
   val mockBBC = new InMemoryHttpService
   @Bind @BBCWebHttpClient val fakeBBCSite: Service[Request, Response] = mockBBC
   override protected val server = new EmbeddedHttpServer(new RestbucksServer)
 
   "returns headlines from BBC news in JSON" in {
-    mockBBC.mockGet("/news", andReturn = response(200).body("<this>"), sticky = false)
+    mockBBC.mockGet(
+      path = "/news",
+      andReturn = response(200).body(bbcNewsHtml),
+      sticky = false)
+
     server.httpGet(path = "/bbc",
       andExpect = Status.Ok,
       withJsonBody =
-        """
+        s"""
           {
            "top_story":
              {
-               "headline":"Something happened: <this>"
+               "headline":"$headline",
+               "link": "$link"
              }
           }
           """)

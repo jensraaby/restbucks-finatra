@@ -22,6 +22,7 @@ lazy val versions = new {
   val scalatest = "2.2.4"
   val specs2 = "2.3.12"
   val guice = "4.0"
+  val jsoup = "1.8.3"
 }
 
 libraryDependencies ++= Seq(
@@ -33,8 +34,6 @@ libraryDependencies ++= Seq(
   "com.twitter.finatra" %% "finatra-jackson" % versions.finatra % "test",
   "com.twitter.finatra" %% "finatra-jackson" % versions.finatra % "test" classifier "tests",
 
-
-
   "com.twitter.inject" %% "inject-app" % versions.finatra % "test",
   "com.twitter.inject" %% "inject-app" % versions.finatra % "test" classifier "tests",
   "com.twitter.inject" %% "inject-core" % versions.finatra % "test",
@@ -45,10 +44,11 @@ libraryDependencies ++= Seq(
   "com.twitter.inject" %% "inject-server" % versions.finatra % "test" classifier "tests",
   "com.google.inject.extensions" % "guice-testlib" % versions.guice % "test",
 
-
   "ch.qos.logback" % "logback-classic" % versions.logbackClassic,
 
   "org.mockito" % "mockito-core" %  versions.mockito % "test",
   "org.scalatest" %% "scalatest" % versions.scalatest % "test",
-  "org.specs2" %% "specs2" % versions.specs2 % "test"
+  "org.specs2" %% "specs2" % versions.specs2 % "test",
+
+  "org.jsoup" % "jsoup" % versions.jsoup
 )
