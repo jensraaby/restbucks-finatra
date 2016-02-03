@@ -1,4 +1,4 @@
-package acceptance
+package feature
 
 import com.jensraaby.restbucks.RestbucksServer
 import com.twitter.finagle.http.Status
