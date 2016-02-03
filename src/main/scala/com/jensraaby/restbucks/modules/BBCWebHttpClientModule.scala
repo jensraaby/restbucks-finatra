@@ -8,7 +8,7 @@ import com.twitter.finatra.json.FinatraObjectMapper
 import com.twitter.inject.TwitterModule
 
 object BBCWebHttpClientModule extends TwitterModule {
-  val hostname = "bbc.com"
+  val hostname = "www.bbc.co.uk"
 
   @Singleton
   @Provides
@@ -29,8 +29,7 @@ object BBCWebHttpClientModule extends TwitterModule {
   @Provides
   @BBCWebHttpClient
   def provideHttpService: Service[Request,Response] = {
-    RichHttpClient.newSslClientService(
-      sslHostname = hostname,
+    RichHttpClient.newClientService(
       dest = hostname + ":80"
     )
   }
