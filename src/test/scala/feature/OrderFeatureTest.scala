@@ -12,19 +12,19 @@ class OrderFeatureTest extends FeatureTest {
 
   val server = new EmbeddedHttpServer(new RestbucksServer)
 
-  "Restbucks takes an order in JSON" in {
+  "Restbucks takes an order for a latte" in {
     server.httpPost(path = "/order",
       postBody =
         """
           |
           | {
           |   "location": "takeAway",
-          |   "item" : {
+          |   "items" : [{
           |     "name": "latte",
           |     "quantity": 1,
           |     "milk": "whole",
           |     "size": "small"
-          |   }
+          |   }]
           |}
         """.stripMargin,
       andExpect = Status.Ok,
@@ -39,6 +39,39 @@ class OrderFeatureTest extends FeatureTest {
           |     "size": "small"
           |   }],
           |   "cost": 3.00,
+          |   "currency": "GBP",
+          |   "link_payment": "/order/1234/payment"
+          |}
+        """.stripMargin)
+  }
+
+  "Restbucks takes an order for 2 lattes" in {
+    server.httpPost(path = "/order",
+      postBody =
+        """
+          |
+          | {
+          |   "location": "takeAway",
+          |   "items" : [{
+          |     "name": "latte",
+          |     "quantity": 2,
+          |     "milk": "whole",
+          |     "size": "small"
+          |   }]
+          |}
+        """.stripMargin,
+      andExpect = Status.Ok,
+      withJsonBody =
+        """
+          |{
+          |   "location": "takeAway",
+          |   "items": [{
+          |     "name": "latte",
+          |     "quantity": 2,
+          |     "milk": "whole",
+          |     "size": "small"
+          |   }],
+          |   "cost": 6.00,
           |   "currency": "GBP",
           |   "link_payment": "/order/1234/payment"
           |}
