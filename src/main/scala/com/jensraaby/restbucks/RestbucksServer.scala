@@ -1,6 +1,6 @@
 package com.jensraaby.restbucks
 
-import com.jensraaby.restbucks.controllers.{BbcController, IndexController}
+import com.jensraaby.restbucks.controllers.{OrderController, BbcController, IndexController}
 import com.jensraaby.restbucks.modules.BBCWebHttpClientModule
 import com.twitter.finatra.http.HttpServer
 import com.twitter.finatra.http.filters.CommonFilters
@@ -19,5 +19,6 @@ class RestbucksServer extends HttpServer {
       .filter[CommonFilters]
       .add[IndexController]
       .add[BbcController]
+      .add[OrderController]
   }
 }
