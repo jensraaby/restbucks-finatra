@@ -16,7 +16,7 @@ javaOptions in Test += "-Dlogback.configurationFile=./src/test/resources/logback
 fork in Test := true
 
 lazy val versions = new {
-  val finatra = "2.1.2"
+  val finatra = "2.1.3"
   val logbackClassic = "1.1.3"
   val mockito = "1.9.5"
   val scalatest = "2.2.4"

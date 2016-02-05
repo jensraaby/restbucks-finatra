@@ -10,7 +10,7 @@ import com.twitter.inject.server.FeatureTest
   */
 class OrderFeatureTest extends FeatureTest {
 
-  val server = new EmbeddedHttpServer(new RestbucksServer)
+  val server = new EmbeddedHttpServer(new RestbucksServer, disableTestLogging = true)
 
   "Restbucks takes an order for a latte" in {
     server.httpPost(path = "/order",

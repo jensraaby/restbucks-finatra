@@ -25,7 +25,7 @@ class BbcHeadlineFeatureTest extends FeatureTest with HttpMockResponses {
 
   val mockBBC = new InMemoryHttpService
   @Bind @BBCWebHttpClient val fakeBBCSite: Service[Request, Response] = mockBBC
-  override protected val server = new EmbeddedHttpServer(new RestbucksServer)
+  override protected val server = new EmbeddedHttpServer(new RestbucksServer, disableTestLogging = true)
 
   "returns headlines from BBC news in JSON" in {
     mockBBC.mockGet(
