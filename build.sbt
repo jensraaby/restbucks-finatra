@@ -22,7 +22,6 @@ lazy val versions = new {
   val scalatest = "2.2.4"
   val specs2 = "2.3.12"
   val guice = "4.0"
-  val jsoup = "1.8.3"
 }
 
 libraryDependencies ++= Seq(
@@ -48,7 +47,5 @@ libraryDependencies ++= Seq(
 
   "org.mockito" % "mockito-core" %  versions.mockito % "test",
   "org.scalatest" %% "scalatest" % versions.scalatest % "test",
-  "org.specs2" %% "specs2" % versions.specs2 % "test",
-
-  "org.jsoup" % "jsoup" % versions.jsoup
-)
+  "org.specs2" %% "specs2" % versions.specs2 % "test"
+  )
