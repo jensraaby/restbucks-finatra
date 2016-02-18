@@ -1,7 +1,7 @@
 # restbucks-finatra
 An attempt to learn to use the Finatra web framework for something.
 
-As most documentation for doing non-trivial things with Finatra 2 is hard to find (or typically a reference to some example code), this is an attempt to go through the motions and make notes.
+As documentation for doing non-trivial things with Finatra 2 is hard to find (or typically a reference to some example code), this is an attempt to go through the motions and make notes.
 
 The aim is to get the following working:
 * Scala Guice dependency injection
@@ -9,6 +9,7 @@ The aim is to get the following working:
 * Acceptance tests using the EmbeddedHttpServer
 * Mockito for isolating components for unit tests
 * InMemoryHttpService for mocking remote HTTP services during tests
+* Heroku deployment
 
 ## Steps
 I'm documenting the steps as I go, because Finatra 2 is shiny, and it's a useful reference for myself (and maybe you, if you're reading this!).
@@ -126,4 +127,27 @@ With this configuration, running `test` from inside sbt gives only the following
 [info] All tests passed.
 [info] Passed: Total 2, Failed 0, Errors 0, Passed 2
 [success] Total time: 5 s, completed 23-Sep-2015 21:57:15
+```
+
+## Heroku deployment
+
+I wanted to see if I can run Finatra on Heroku.
+These are the steps I took, based on the official example at 
+https://github.com/twitter/finatra/tree/master/examples/hello-world-heroku
+
+1. Add SBT-Native-packager plugin to project/plugins.sbt
+``
+    addSbtPlugin("com.typesafe.sbt" % "sbt-native-packager" % "1.0.6")
+``
+2. Add Java app archetype to build.sbt:
+``
+    enablePlugins(JavaAppPackaging)
+``
+
+I also had to disable the Twitter admin interface in the RestbucksServer class as Heroku only allows one port to be opened.
+
+Lastly, I ran a few commands to create a Heroku app and push:
+```
+heroku create
+git push heroku master
 ```
