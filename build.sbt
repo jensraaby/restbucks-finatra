@@ -1,5 +1,5 @@
-import com.typesafe.sbt.SbtNativePackager._
 
+enablePlugins(JavaAppPackaging)
 
 name := "restbucks-finatra"
 version := scala.util.Properties.envOrElse("BUILD_VERSION","dev")
