@@ -10,6 +10,8 @@ object RestbucksServerMain extends RestbucksServer
 
 class RestbucksServer extends HttpServer {
 
+  override val disableAdminHttpServer = true
+
   override def configureHttp(router: HttpRouter): Unit = {
 
     router
