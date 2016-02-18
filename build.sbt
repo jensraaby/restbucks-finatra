@@ -1,8 +1,13 @@
+import com.typesafe.sbt.SbtNativePackager._
+
+
 name := "restbucks-finatra"
 version := scala.util.Properties.envOrElse("BUILD_VERSION","dev")
-organization := "jensraaby"
+organization := "com.jensraaby"
 
 scalaVersion := "2.11.7"
+fork in run := true
+parallelExecution in ThisBuild := false
 
 resolvers ++= Seq(
   Resolver.sonatypeRepo("releases"),
@@ -22,6 +27,11 @@ lazy val versions = new {
   val scalatest = "2.2.4"
   val specs2 = "2.3.12"
   val guice = "4.0"
+}
+
+assemblyMergeStrategy in assembly := {
+  case "BUILD" => MergeStrategy.discard
+  case other => MergeStrategy.defaultMergeStrategy(other)
 }
 
 libraryDependencies ++= Seq(

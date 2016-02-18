@@ -16,7 +16,7 @@ class IndexFeatureTest extends FeatureTest {
     val result = server.httpGet(
       path = "/",
       andExpect = Status.Ok,
-      withBody = "Hello World"
+      withBody = "<h1>Welcome to Restbucks!</h1>"
     )
 
 
