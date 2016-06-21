@@ -5,9 +5,6 @@ import com.twitter.finagle.http.Status
 import com.twitter.finatra.http.test.EmbeddedHttpServer
 import com.twitter.inject.server.FeatureTest
 
-/**
-  * Created by jens on 04/02/2016.
-  */
 class OrderFeatureTest extends FeatureTest {
 
   val server = new EmbeddedHttpServer(new RestbucksServer, disableTestLogging = true)

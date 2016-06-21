@@ -7,7 +7,7 @@ import org.scalatest.{FlatSpec, Matchers}
 class OrderServiceTest extends FlatSpec with Matchers {
 
   "An order service" should "create an order with the correct price" in {
-    val service = new OrderService(new StandardProductProvider)
+    val service = new OrderService(new HardcodedInventory)
     val order = Order("takeaway", Seq(OrderItem("latte", 1, "whole", "small")))
 
     val acknowledgedOrder = Await.result(service.create(order))
@@ -15,7 +15,7 @@ class OrderServiceTest extends FlatSpec with Matchers {
   }
 
   it should "not return an order if the item does not exist" in {
-      val service = new OrderService(new StandardProductProvider)
+      val service = new OrderService(new HardcodedInventory)
       val order = Order("takeaway", Seq(OrderItem("caffelungo", 1, "skimmed", "tiny")))
 
       intercept[RuntimeException](Await.result(service.create(order))).getMessage shouldBe "invalid order"

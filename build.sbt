@@ -1,11 +1,10 @@
-
 enablePlugins(JavaAppPackaging)
 
 name := "restbucks-finatra"
 version := scala.util.Properties.envOrElse("BUILD_VERSION","dev")
 organization := "com.jensraaby"
 
-scalaVersion := "2.11.7"
+scalaVersion := "2.11.8"
 fork in run := true
 parallelExecution in ThisBuild := false
 
@@ -21,12 +20,13 @@ javaOptions in Test += "-Dlogback.configurationFile=./src/test/resources/logback
 fork in Test := true
 
 lazy val versions = new {
-  val finatra = "2.1.3"
+  val finatra = "2.1.6"
   val logbackClassic = "1.1.3"
   val mockito = "1.9.5"
   val scalatest = "2.2.4"
   val specs2 = "2.3.12"
   val guice = "4.0"
+  val circe = "0.4.1"
 }
 
 assemblyMergeStrategy in assembly := {
@@ -57,5 +57,9 @@ libraryDependencies ++= Seq(
 
   "org.mockito" % "mockito-core" %  versions.mockito % "test",
   "org.scalatest" %% "scalatest" % versions.scalatest % "test",
-  "org.specs2" %% "specs2" % versions.specs2 % "test"
+  "org.specs2" %% "specs2" % versions.specs2 % "test",
+
+  "io.circe" %% "circe-core" % versions.circe,
+  "io.circe" %% "circe-generic" % versions.circe,
+  "io.circe" %% "circe-parser" % versions.circe
   )
