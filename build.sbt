@@ -1,7 +1,7 @@
 enablePlugins(JavaAppPackaging)
 
 name := "restbucks-finatra"
-version := scala.util.Properties.envOrElse("BUILD_VERSION","dev")
+version := scala.util.Properties.envOrElse("BUILD_NUMBER","dev")
 organization := "com.jensraaby"
 
 scalaVersion := "2.11.8"
@@ -20,10 +20,10 @@ javaOptions in Test += "-Dlogback.configurationFile=./src/test/resources/logback
 fork in Test := true
 
 lazy val versions = new {
-  val finatra = "2.1.6"
+  val finatra = "2.2.0"
   val logbackClassic = "1.1.3"
   val mockito = "1.9.5"
-  val scalatest = "2.2.4"
+  val scalatest = "2.2.6"
   val specs2 = "2.3.12"
   val guice = "4.0"
   val circe = "0.4.1"
@@ -35,22 +35,22 @@ assemblyMergeStrategy in assembly := {
 }
 
 libraryDependencies ++= Seq(
-  "com.twitter.finatra" %% "finatra-http" % versions.finatra,
-  "com.twitter.finatra" %% "finatra-http" % versions.finatra % "test" classifier "tests",
-  "com.twitter.finatra" %% "finatra-httpclient" % versions.finatra,
-  "com.twitter.finatra" %% "finatra-httpclient" % versions.finatra % "test" classifier "tests",
-  "com.twitter.finatra" %% "finatra-slf4j" % versions.finatra,
-  "com.twitter.finatra" %% "finatra-jackson" % versions.finatra % "test",
-  "com.twitter.finatra" %% "finatra-jackson" % versions.finatra % "test" classifier "tests",
+  "com.twitter" %% "finatra-http" % versions.finatra,
+  "com.twitter" %% "finatra-http" % versions.finatra % "test" classifier "tests",
+  "com.twitter" %% "finatra-httpclient" % versions.finatra,
+  "com.twitter" %% "finatra-httpclient" % versions.finatra % "test" classifier "tests",
+  "com.twitter" %% "finatra-slf4j" % versions.finatra,
+  "com.twitter" %% "finatra-jackson" % versions.finatra % "test",
+  "com.twitter" %% "finatra-jackson" % versions.finatra % "test" classifier "tests",
 
-  "com.twitter.inject" %% "inject-app" % versions.finatra % "test",
-  "com.twitter.inject" %% "inject-app" % versions.finatra % "test" classifier "tests",
-  "com.twitter.inject" %% "inject-core" % versions.finatra % "test",
-  "com.twitter.inject" %% "inject-core" % versions.finatra % "test" classifier "tests",
-  "com.twitter.inject" %% "inject-modules" % versions.finatra % "test",
-  "com.twitter.inject" %% "inject-modules" % versions.finatra % "test" classifier "tests",
-  "com.twitter.inject" %% "inject-server" % versions.finatra % "test",
-  "com.twitter.inject" %% "inject-server" % versions.finatra % "test" classifier "tests",
+  "com.twitter" %% "inject-app" % versions.finatra % "test",
+  "com.twitter" %% "inject-app" % versions.finatra % "test" classifier "tests",
+  "com.twitter" %% "inject-core" % versions.finatra % "test",
+  "com.twitter" %% "inject-core" % versions.finatra % "test" classifier "tests",
+  "com.twitter" %% "inject-modules" % versions.finatra % "test",
+  "com.twitter" %% "inject-modules" % versions.finatra % "test" classifier "tests",
+  "com.twitter" %% "inject-server" % versions.finatra % "test",
+  "com.twitter" %% "inject-server" % versions.finatra % "test" classifier "tests",
   "com.google.inject.extensions" % "guice-testlib" % versions.guice % "test",
 
   "ch.qos.logback" % "logback-classic" % versions.logbackClassic,
