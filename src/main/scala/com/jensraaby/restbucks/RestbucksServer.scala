@@ -1,6 +1,6 @@
 package com.jensraaby.restbucks
 
-import com.jensraaby.restbucks.controllers.{IndexController, OrderController}
+import com.jensraaby.restbucks.controllers.{StaticFilesController, OrderController}
 import com.twitter.finatra.http.HttpServer
 import com.twitter.finatra.http.filters.CommonFilters
 import com.twitter.finatra.http.routing.HttpRouter
@@ -16,7 +16,7 @@ class RestbucksServer extends HttpServer {
 
     router
       .filter[CommonFilters]
-      .add[IndexController]
+      .add[StaticFilesController]
       .add[OrderController]
   }
 }
