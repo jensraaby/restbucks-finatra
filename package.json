@@ -1,0 +1,27 @@
+{
+  "name": "restbucks-finatra",
+  "version": "1.0.0",
+  "description": "An attempt to learn to use the Finatra web framework for something.",
+  "main": "main.js",
+  "scripts": {
+    "start": "webpack-dev-server --content-base src/main/resources"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jensraaby/restbucks-finatra.git"
+  },
+  "author": "Jens Raaby",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jensraaby/restbucks-finatra/issues"
+  },
+  "homepage": "https://github.com/jensraaby/restbucks-finatra#readme",
+  "dependencies": {
+    "css-loader": "^0.23.1",
+    "style-loader": "^0.13.1"
+  },
+  "devDependencies": {
+    "webpack-dev-server": "^1.14.1",
+    "webpack": "^1.13.1"
+  }
+}
