@@ -5,7 +5,7 @@ version := scala.util.Properties.envOrElse("BUILD_NUMBER","dev")
 organization := "com.jensraaby"
 
 scalaVersion := "2.11.8"
-fork in run := true
+fork := true
 parallelExecution in ThisBuild := false
 
 resolvers ++= Seq(
@@ -17,7 +17,6 @@ resolvers ++= Seq(
 // see http://www.scalatest.org/user_guide/using_the_runner
 testOptions in Test += Tests.Argument("-oCOLHPQ")
 javaOptions in Test += "-Dlogback.configurationFile=./src/test/resources/logback-test.xml"
-fork in Test := true
 
 lazy val versions = new {
   val finatra = "2.2.0"
@@ -27,6 +26,7 @@ lazy val versions = new {
   val specs2 = "2.3.12"
   val guice = "4.0"
   val circe = "0.4.1"
+  val junit = "4.11"
 }
 
 assemblyMergeStrategy in assembly := {
@@ -57,7 +57,8 @@ libraryDependencies ++= Seq(
 
   "org.mockito" % "mockito-core" %  versions.mockito % "test",
   "org.scalatest" %% "scalatest" % versions.scalatest % "test",
-  "org.specs2" %% "specs2" % versions.specs2 % "test",
+//  "org.specs2" %% "specs2" % versions.specs2 % "test",
+  "junit" % "junit" % versions.junit % "test",
 
   "io.circe" %% "circe-core" % versions.circe,
   "io.circe" %% "circe-generic" % versions.circe,
