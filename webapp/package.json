@@ -4,7 +4,7 @@
   "description": "An attempt to learn to use the Finatra web framework for something.",
   "main": "main.js",
   "scripts": {
-    "start": "webpack-dev-server --content-base src/main/resources"
+    "start": "webpack-dev-server --content-base ../src/main/resources"
   },
   "repository": {
     "type": "git",

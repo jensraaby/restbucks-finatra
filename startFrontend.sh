@@ -1,2 +1,4 @@
 #!/bin/sh
-npm start
+pushd webapp/
+    npm start
+popd
