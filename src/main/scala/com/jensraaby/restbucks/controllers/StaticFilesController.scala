@@ -9,11 +9,7 @@ class StaticFilesController extends Controller {
     response.ok.file("/index.html")
   }
 
-  get("/js:*") { request: Request =>
-    response.ok.file("/js" + request.params("*"))
-  }
-
-  get("/css:*") { request: Request =>
-    response.ok.file("/css" + request.params("*"))
+  get("/:*") { request: Request =>
+    response.ok.file("/" + request.params("*"))
   }
 }

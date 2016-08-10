@@ -5,6 +5,8 @@ import com.twitter.finagle.http.Status
 import com.twitter.finatra.http.EmbeddedHttpServer
 import com.twitter.inject.server.FeatureTest
 
+import scala.io.Source
+
 class StaticFilesTest extends FeatureTest {
   override val server: EmbeddedHttpServer = new EmbeddedHttpServer(new RestbucksServer, verbose = false, disableTestLogging = true)
 
@@ -12,7 +14,7 @@ class StaticFilesTest extends FeatureTest {
     server.httpGet(
       path = "/",
       andExpect = Status.Ok,
-      withBody = "<h1>Welcome to Restbucks!</h1>"
+      withBody = Source.fromFile("./src/main/resources/index.html").mkString
     )
   }
 
