@@ -9,14 +9,12 @@ import com.twitter.finatra.http.routing.HttpRouter
 object RestbucksServerMain extends RestbucksServer
 
 class RestbucksServer extends HttpServer {
-
+  override val name = "restbucks"
   override val disableAdminHttpServer = true
 
-  override def configureHttp(router: HttpRouter): Unit = {
-
+  override def configureHttp(router: HttpRouter): Unit =
     router
       .filter[CommonFilters]
       .add[StaticFilesController]
       .add[OrderController]
-  }
 }

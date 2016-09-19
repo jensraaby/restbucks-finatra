@@ -1,16 +1,18 @@
-enablePlugins(JavaAppPackaging)
+import sbt.Keys._
+
 
 name := "restbucks-finatra"
-version := scala.util.Properties.envOrElse("BUILD_NUMBER","dev")
 organization := "com.jensraaby"
+version := scala.util.Properties.envOrElse("BUILD_NUMBER","dev")
 
 scalaVersion := "2.11.8"
-fork := true
+
+fork := true // required for javaOptions to be passed
 parallelExecution in ThisBuild := false
 
 resolvers ++= Seq(
-  Resolver.sonatypeRepo("releases"),
-  "Twitter Maven" at "https://maven.twttr.com"
+    Resolver.sonatypeRepo("releases"),
+"Twitter Maven" at "https://maven.twttr.com"
 )
 
 // Make test output quiet unless a test fails:
@@ -18,48 +20,58 @@ resolvers ++= Seq(
 testOptions in Test += Tests.Argument("-oCOLHPQ")
 javaOptions in Test += "-Dlogback.configurationFile=./src/test/resources/logback-test.xml"
 
-lazy val versions = new {
-  val finatra = "2.2.0"
-  val logbackClassic = "1.1.3"
-  val mockito = "1.9.5"
-  val scalatest = "2.2.6"
-  val specs2 = "2.3.12"
-  val guice = "4.0"
-  val circe = "0.4.1"
-  val junit = "4.11"
-}
+enablePlugins(JavaAppPackaging)
 
 assemblyMergeStrategy in assembly := {
   case "BUILD" => MergeStrategy.discard
+  case "META-INF/io.netty.versions.properties" => MergeStrategy.last
   case other => MergeStrategy.defaultMergeStrategy(other)
+}
+
+excludeFilter in (Compile, unmanagedSources) := HiddenFileFilter || "BUILD"
+excludeFilter in (Compile, unmanagedResources) := HiddenFileFilter || "BUILD"
+
+unmanagedResourceDirectories in Compile += baseDirectory.value / "src" / "main" / "webapp"
+
+Revolver.settings
+
+
+lazy val versions = new {
+  val finatra = "2.4.0"
+  val guice = "4.0"
+  val logback = "1.1.7"
+  val mockito = "1.9.5"
+  val scalatest = "2.2.6"
+  val specs2 = "2.3.12"
+  val circe = "0.4.1"
 }
 
 libraryDependencies ++= Seq(
   "com.twitter" %% "finatra-http" % versions.finatra,
-  "com.twitter" %% "finatra-http" % versions.finatra % "test" classifier "tests",
   "com.twitter" %% "finatra-httpclient" % versions.finatra,
-  "com.twitter" %% "finatra-httpclient" % versions.finatra % "test" classifier "tests",
-  "com.twitter" %% "finatra-slf4j" % versions.finatra,
-  "com.twitter" %% "finatra-jackson" % versions.finatra % "test",
-  "com.twitter" %% "finatra-jackson" % versions.finatra % "test" classifier "tests",
+  "ch.qos.logback" % "logback-classic" % versions.logback,
 
-  "com.twitter" %% "inject-app" % versions.finatra % "test",
-  "com.twitter" %% "inject-app" % versions.finatra % "test" classifier "tests",
-  "com.twitter" %% "inject-core" % versions.finatra % "test",
-  "com.twitter" %% "inject-core" % versions.finatra % "test" classifier "tests",
-  "com.twitter" %% "inject-modules" % versions.finatra % "test",
-  "com.twitter" %% "inject-modules" % versions.finatra % "test" classifier "tests",
+  "com.twitter" %% "finatra-http" % versions.finatra % "test",
+  "com.twitter" %% "finatra-jackson" % versions.finatra % "test",
   "com.twitter" %% "inject-server" % versions.finatra % "test",
-  "com.twitter" %% "inject-server" % versions.finatra % "test" classifier "tests",
+  "com.twitter" %% "inject-app" % versions.finatra % "test",
+  "com.twitter" %% "inject-core" % versions.finatra % "test",
+  "com.twitter" %% "inject-modules" % versions.finatra % "test",
   "com.google.inject.extensions" % "guice-testlib" % versions.guice % "test",
 
-  "ch.qos.logback" % "logback-classic" % versions.logbackClassic,
+  "com.twitter" %% "finatra-http" % versions.finatra % "test" classifier "tests",
+  "com.twitter" %% "finatra-jackson" % versions.finatra % "test" classifier "tests",
+  "com.twitter" %% "inject-server" % versions.finatra % "test" classifier "tests",
+  "com.twitter" %% "inject-app" % versions.finatra % "test" classifier "tests",
+  "com.twitter" %% "inject-core" % versions.finatra % "test" classifier "tests",
+  "com.twitter" %% "inject-modules" % versions.finatra % "test" classifier "tests",
 
-  "org.mockito" % "mockito-core" %  versions.mockito % "test",
+  "org.mockito" % "mockito-core" % versions.mockito % "test",
   "org.scalatest" %% "scalatest" % versions.scalatest % "test",
-//  "org.specs2" %% "specs2" % versions.specs2 % "test",
-  "junit" % "junit" % versions.junit % "test",
+  "org.specs2" %% "specs2" % versions.specs2 % "test")
 
+// custom dependencies (ie. non-Finatra)
+libraryDependencies ++= Seq(
   "io.circe" %% "circe-core" % versions.circe,
   "io.circe" %% "circe-generic" % versions.circe,
   "io.circe" %% "circe-parser" % versions.circe
