@@ -15,6 +15,6 @@ class RestbucksServer extends HttpServer {
   override def configureHttp(router: HttpRouter): Unit =
     router
       .filter[CommonFilters]
-      .add[StaticFilesController]
       .add[OrderController]
+      .add[StaticFilesController]
 }

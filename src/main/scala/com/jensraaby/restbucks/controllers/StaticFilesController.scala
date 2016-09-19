@@ -5,11 +5,7 @@ import com.twitter.finatra.http.Controller
 
 class StaticFilesController extends Controller {
 
-  get("/") { req: Request =>
-    response.ok.file("/index.html")
-  }
-
-  get("/:*") { request: Request =>
-    response.ok.file("/" + request.params("*"))
+  get("/:*") { req: Request =>
+    response.ok.fileOrIndex(req.params("*"), "index.html")
   }
 }

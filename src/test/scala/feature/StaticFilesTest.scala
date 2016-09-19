@@ -26,7 +26,7 @@ class StaticFilesTest extends FeatureTest {
   }
 
   "CSS file" in {
-    val response = server.httpGet("/css/restbucks.css",
+    server.httpGet("/css/restbucks.css",
       andExpect = Status.Ok)
   }
 }

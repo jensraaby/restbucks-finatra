@@ -75,4 +75,14 @@ class OrderFeatureTest extends FeatureTest {
         """.stripMargin)
   }
 
+  "Simple wrapped value" in {
+    server.httpGet("/orders/1",
+      andExpect = Status.Ok,
+      withJsonBody =
+        """
+          |{
+          |  "id": "1"
+          |}
+        """.stripMargin)
+  }
 }
