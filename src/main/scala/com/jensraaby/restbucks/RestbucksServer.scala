@@ -13,7 +13,7 @@ object RestbucksServerMain extends RestbucksServer
 
 class RestbucksServer extends HttpServer {
   override val name = "restbucks"
-  override val disableAdminHttpServer = false
+  override val disableAdminHttpServer = true
 
   override protected def modules: Seq[Module] = Seq(CorsModule)
 
