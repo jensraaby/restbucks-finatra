@@ -1,8 +1,9 @@
 import sbt.Keys._
-
+import com.typesafe.sbt.SbtNativePackager._
+packageArchetype.java_application
 
 name := "restbucks-finatra"
-version := "0.0.1"
+version := "0.0.1-SNAPSHOT"
 organization := "com.jensraaby"
 
 scalaVersion := "2.11.8"
