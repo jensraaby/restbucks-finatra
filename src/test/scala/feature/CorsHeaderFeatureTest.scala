@@ -15,7 +15,7 @@ class CorsHeaderFeatureTest extends FeatureTest {
 
   "RestbucksServer" should {
     "startup" in {
-      server.assertHealthy()
+      server.assertStarted()
     }
 
     "add CORS header" in {
