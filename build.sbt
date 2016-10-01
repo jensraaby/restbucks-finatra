@@ -2,8 +2,8 @@ import sbt.Keys._
 
 
 name := "restbucks-finatra"
+version := "0.0.1"
 organization := "com.jensraaby"
-version := scala.util.Properties.envOrElse("BUILD_NUMBER","dev")
 
 scalaVersion := "2.11.8"
 
@@ -43,7 +43,7 @@ lazy val versions = new {
   val mockito = "1.9.5"
   val scalatest = "2.2.6"
   val specs2 = "2.3.12"
-  val circe = "0.4.1"
+  val circe = "0.5.1"
 }
 
 libraryDependencies ++= Seq(
@@ -75,4 +75,5 @@ libraryDependencies ++= Seq(
   "io.circe" %% "circe-core" % versions.circe,
   "io.circe" %% "circe-generic" % versions.circe,
   "io.circe" %% "circe-parser" % versions.circe
-  )
+)
+
