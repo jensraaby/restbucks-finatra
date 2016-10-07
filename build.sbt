@@ -1,7 +1,5 @@
 import sbt.Keys._
 import com.typesafe.sbt.SbtNativePackager._
-packageArchetype.java_application
-
 name := "restbucks-finatra"
 version := "0.0.1-SNAPSHOT"
 organization := "com.jensraaby"
@@ -77,4 +75,3 @@ libraryDependencies ++= Seq(
   "io.circe" %% "circe-generic" % versions.circe,
   "io.circe" %% "circe-parser" % versions.circe
 )
-

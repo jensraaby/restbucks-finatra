@@ -14,11 +14,10 @@ class OrderService @Inject()(productProvider: Inventory) {
       Future.exception(new RuntimeException("invalid order"))
     }
 
-  private def calculateItemPrice(item: OrderItem): Double = {
+  private[this] def calculateItemPrice(item: OrderItem): Double = {
     productProvider.prices(item.name) * item.quantity
   }
 
-  private def validateOrder(order: Order) =
-    order.items.map(item => productProvider.products.contains(item.name))
-      .foldLeft(true)(_ && _)
+  private[this] def validateOrder(order: Order): Boolean =
+    order.items.map(item => productProvider.products.contains(item.name)).fold(true)(_ && _)
 }

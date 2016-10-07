@@ -28,5 +28,17 @@ class CorsHeaderFeatureTest extends FeatureTest {
 //      response.headerMap.get("Access-Control-Allow-Headers") shouldBe Some("Origin, X-Requested-With, Content-Type, Accept")
       response.headerMap.get("Access-Control-Allow-Credentials") shouldBe Some("true")
     }
+
+    "add CORS headers when requested" in {
+      val response = server.httpGet("/index.html",
+        headers = Map("Origin" -> "myOrigin",
+          "Access-Control-Request-Method" -> "GET",
+          "Access-Control-Request-Headers" -> "X-Custom-Header"),
+        andExpect = Status.Ok)
+
+      response.headerMap.get("Access-Control-Allow-Origin") shouldBe Some("myOrigin")
+      response.headerMap.get("Access-Control-Allow-Credentials") shouldBe Some("true")
+      response.headerMap.get("Access-Control-Allow-Headers") shouldBe None //Some("X-Custom-Header")
+    }
   }
 }
