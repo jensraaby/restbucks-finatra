@@ -10,8 +10,8 @@ fork := true // required for javaOptions to be passed
 parallelExecution in ThisBuild := false
 
 resolvers ++= Seq(
-    Resolver.sonatypeRepo("releases"),
-"Twitter Maven" at "https://maven.twttr.com"
+  Resolver.sonatypeRepo("releases"),
+  "Twitter Maven" at "https://maven.twttr.com"
 )
 
 // Make test output quiet unless a test fails:
@@ -19,6 +19,10 @@ resolvers ++= Seq(
 testOptions in Test += Tests.Argument("-oCOLHPQ")
 javaOptions in Test += "-Dlogback.configurationFile=./src/test/resources/logback-test.xml"
 
+javaOptions ++= Seq(
+  "-Dlog.service.output=/dev/stdout",
+  "-Dlog.access.output=/dev/stdout"
+)
 enablePlugins(JavaAppPackaging)
 
 assemblyMergeStrategy in assembly := {
@@ -43,6 +47,8 @@ lazy val versions = new {
   val scalatest = "2.2.6"
   val specs2 = "2.3.12"
   val circe = "0.5.1"
+  val metricsCore = "3.1.2"
+  val finagleMetrics = "0.0.3"
 }
 
 libraryDependencies ++= Seq(
@@ -73,5 +79,9 @@ libraryDependencies ++= Seq(
 libraryDependencies ++= Seq(
   "io.circe" %% "circe-core" % versions.circe,
   "io.circe" %% "circe-generic" % versions.circe,
-  "io.circe" %% "circe-parser" % versions.circe
+  "io.circe" %% "circe-parser" % versions.circe,
+
+  "com.github.rlazoti" %% "finagle-metrics" % versions.finagleMetrics,
+  "io.dropwizard.metrics" % "metrics-core" % versions.metricsCore,
+  "io.dropwizard.metrics" % "metrics-graphite" % versions.metricsCore
 )
