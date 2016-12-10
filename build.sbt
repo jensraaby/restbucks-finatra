@@ -23,6 +23,7 @@ javaOptions ++= Seq(
   "-Dlog.service.output=/dev/stdout",
   "-Dlog.access.output=/dev/stdout"
 )
+
 enablePlugins(JavaAppPackaging)
 
 assemblyMergeStrategy in assembly := {
@@ -40,12 +41,14 @@ Revolver.settings
 
 
 lazy val versions = new {
-  val finatra = "2.4.0"
+  val finatra = "2.6.0"
   val guice = "4.0"
   val logback = "1.1.7"
   val mockito = "1.9.5"
-  val scalatest = "2.2.6"
+  val scalatest = "3.0.1"
+  val scalacheck = "1.13.4"
   val specs2 = "2.3.12"
+
   val circe = "0.5.1"
   val metricsCore = "3.1.2"
   val finagleMetrics = "0.0.3"
@@ -72,6 +75,7 @@ libraryDependencies ++= Seq(
   "com.twitter" %% "inject-modules" % versions.finatra % "test" classifier "tests",
 
   "org.mockito" % "mockito-core" % versions.mockito % "test",
+  "org.scalacheck" %% "scalacheck" % versions.scalacheck % "test",
   "org.scalatest" %% "scalatest" % versions.scalatest % "test",
   "org.specs2" %% "specs2" % versions.specs2 % "test")
 
