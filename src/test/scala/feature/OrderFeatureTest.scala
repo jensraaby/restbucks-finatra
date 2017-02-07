@@ -9,7 +9,7 @@ class OrderFeatureTest extends FeatureTest {
 
   override val server = new EmbeddedHttpServer(new RestbucksServer, disableTestLogging = true)
 
-  "Restbucks takes an order for a latte" in {
+  test("Restbucks takes an order for a latte") {
     server.httpPost(path = "/order",
       postBody =
         """
@@ -42,7 +42,7 @@ class OrderFeatureTest extends FeatureTest {
         """.stripMargin)
   }
 
-  "Restbucks takes an order for 2 lattes" in {
+  test("Restbucks takes an order for 2 lattes") {
     server.httpPost(path = "/order",
       postBody =
         """
@@ -75,7 +75,7 @@ class OrderFeatureTest extends FeatureTest {
         """.stripMargin)
   }
 
-  "Simple wrapped value" in {
+  test("Simple wrapped value") {
     server.httpGet("/orders/1",
       andExpect = Status.Ok,
       withJsonBody =

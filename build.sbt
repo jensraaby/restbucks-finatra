@@ -1,13 +1,11 @@
-import sbt.Keys._
-import com.typesafe.sbt.SbtNativePackager._
 name := "restbucks-finatra"
-version := "0.0.1-SNAPSHOT"
 organization := "com.jensraaby"
+version := "0.0.1-SNAPSHOT"
 
 scalaVersion := "2.11.8"
 
-fork := true // required for javaOptions to be passed
 parallelExecution in ThisBuild := false
+fork := true // required for javaOptions to be passed
 
 resolvers ++= Seq(
   Resolver.sonatypeRepo("releases"),
@@ -32,22 +30,19 @@ assemblyMergeStrategy in assembly := {
   case other => MergeStrategy.defaultMergeStrategy(other)
 }
 
-excludeFilter in (Compile, unmanagedSources) := HiddenFileFilter || "BUILD"
-excludeFilter in (Compile, unmanagedResources) := HiddenFileFilter || "BUILD"
-
 unmanagedResourceDirectories in Compile += baseDirectory.value / "src" / "main" / "webapp"
 
 Revolver.settings
 
 
 lazy val versions = new {
-  val finatra = "2.6.0"
+  val finatra = "2.8.0"
   val guice = "4.0"
   val logback = "1.1.7"
   val mockito = "1.9.5"
   val scalatest = "3.0.1"
   val scalacheck = "1.13.4"
-  val specs2 = "2.3.12"
+  val specs2 = "2.4.17"
 
   val circe = "0.5.1"
   val metricsCore = "3.1.2"
@@ -59,25 +54,25 @@ libraryDependencies ++= Seq(
   "com.twitter" %% "finatra-httpclient" % versions.finatra,
   "ch.qos.logback" % "logback-classic" % versions.logback,
 
-  "com.twitter" %% "finatra-http" % versions.finatra % "test",
-  "com.twitter" %% "finatra-jackson" % versions.finatra % "test",
-  "com.twitter" %% "inject-server" % versions.finatra % "test",
-  "com.twitter" %% "inject-app" % versions.finatra % "test",
-  "com.twitter" %% "inject-core" % versions.finatra % "test",
-  "com.twitter" %% "inject-modules" % versions.finatra % "test",
-  "com.google.inject.extensions" % "guice-testlib" % versions.guice % "test",
+  "com.twitter" %% "finatra-http" % versions.finatra % Test,
+  "com.twitter" %% "finatra-jackson" % versions.finatra % Test,
+  "com.twitter" %% "inject-server" % versions.finatra % Test,
+  "com.twitter" %% "inject-app" % versions.finatra % Test,
+  "com.twitter" %% "inject-core" % versions.finatra % Test,
+  "com.twitter" %% "inject-modules" % versions.finatra % Test,
+  "com.google.inject.extensions" % "guice-testlib" % versions.guice % Test,
 
-  "com.twitter" %% "finatra-http" % versions.finatra % "test" classifier "tests",
-  "com.twitter" %% "finatra-jackson" % versions.finatra % "test" classifier "tests",
-  "com.twitter" %% "inject-server" % versions.finatra % "test" classifier "tests",
-  "com.twitter" %% "inject-app" % versions.finatra % "test" classifier "tests",
-  "com.twitter" %% "inject-core" % versions.finatra % "test" classifier "tests",
-  "com.twitter" %% "inject-modules" % versions.finatra % "test" classifier "tests",
+  "com.twitter" %% "finatra-http" % versions.finatra % Test classifier "tests",
+  "com.twitter" %% "finatra-jackson" % versions.finatra % Test classifier "tests",
+  "com.twitter" %% "inject-server" % versions.finatra % Test classifier "tests",
+  "com.twitter" %% "inject-app" % versions.finatra % Test classifier "tests",
+  "com.twitter" %% "inject-core" % versions.finatra % Test classifier "tests",
+  "com.twitter" %% "inject-modules" % versions.finatra % Test classifier "tests",
 
-  "org.mockito" % "mockito-core" % versions.mockito % "test",
-  "org.scalacheck" %% "scalacheck" % versions.scalacheck % "test",
-  "org.scalatest" %% "scalatest" % versions.scalatest % "test",
-  "org.specs2" %% "specs2" % versions.specs2 % "test")
+  "org.mockito" % "mockito-core" % versions.mockito % Test,
+  "org.scalacheck" %% "scalacheck" % versions.scalacheck % Test,
+  "org.scalatest" %% "scalatest" % versions.scalatest % Test,
+  "org.specs2" %% "specs2-mock" % versions.specs2 % Test)
 
 // custom dependencies (ie. non-Finatra)
 libraryDependencies ++= Seq(

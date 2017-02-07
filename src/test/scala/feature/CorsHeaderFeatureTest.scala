@@ -13,12 +13,11 @@ class CorsHeaderFeatureTest extends FeatureTest {
     verbose = false,
     disableTestLogging = true)
 
-  "RestbucksServer" should {
-    "startup" in {
+    test("startup") {
       server.assertStarted()
     }
 
-    "add CORS header" in {
+    test("add CORS header") {
       val response = server.httpGet("/index.html",
         headers = Map("Origin" -> "myOrigin",
                       "Access-Control-Request-Method" -> "GET"),
@@ -29,7 +28,7 @@ class CorsHeaderFeatureTest extends FeatureTest {
       response.headerMap.get("Access-Control-Allow-Credentials") shouldBe Some("true")
     }
 
-    "add CORS headers when requested" in {
+    test("add CORS headers when requested") {
       val response = server.httpGet("/index.html",
         headers = Map("Origin" -> "myOrigin",
           "Access-Control-Request-Method" -> "GET",
@@ -40,5 +39,4 @@ class CorsHeaderFeatureTest extends FeatureTest {
       response.headerMap.get("Access-Control-Allow-Credentials") shouldBe Some("true")
       response.headerMap.get("Access-Control-Allow-Headers") shouldBe None //Some("X-Custom-Header")
     }
-  }
 }

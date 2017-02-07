@@ -10,7 +10,7 @@ import scala.io.Source
 class StaticFilesTest extends FeatureTest {
   override val server: EmbeddedHttpServer = new EmbeddedHttpServer(new RestbucksServer, verbose = false, disableTestLogging = true)
 
-  "index route returns hello world page" in {
+  test("index route returns hello world page") {
     server.httpGet(
       path = "/",
       andExpect = Status.Ok,
@@ -18,14 +18,14 @@ class StaticFilesTest extends FeatureTest {
     )
   }
 
-  "javascript file" in {
+  test("javascript file") {
     val response = server.httpGet("/js/jquery.js",
       andExpect = Status.Ok)
 
     response.contentString should startWith("{")
   }
 
-  "CSS file" in {
+  test("CSS file") {
     server.httpGet("/css/restbucks.css",
       andExpect = Status.Ok)
   }
