@@ -2,7 +2,7 @@ package com.jensraaby.restbucks
 
 import com.google.inject.Module
 import com.jensraaby.restbucks.controllers.{OrderController, StaticFilesController}
-import com.jensraaby.restbucks.modules.{CorsModule, MetricReportingModule}
+import com.jensraaby.restbucks.modules.CorsModule
 import com.twitter.finagle.http.filter.Cors
 import com.twitter.finatra.http.HttpServer
 import com.twitter.finatra.http.filters.CommonFilters
@@ -13,11 +13,10 @@ object RestbucksServerMain extends RestbucksServer
 
 class RestbucksServer extends HttpServer {
   override val name = "restbucks"
-  override val disableAdminHttpServer = true
+//  override val disableAdminHttpServer = true
 
   override protected def modules: Seq[Module] = Seq(
-    CorsModule,
-    MetricReportingModule
+    CorsModule
   )
 
   override def configureHttp(router: HttpRouter): Unit =
@@ -26,6 +25,4 @@ class RestbucksServer extends HttpServer {
       .filter[Cors.HttpFilter]
       .add[OrderController]
       .add[StaticFilesController]
-
-
 }

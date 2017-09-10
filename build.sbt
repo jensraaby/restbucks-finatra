@@ -2,7 +2,7 @@ name := "restbucks-finatra"
 organization := "com.jensraaby"
 version := "0.0.1-SNAPSHOT"
 
-scalaVersion := "2.11.8"
+scalaVersion := "2.12.2"
 
 parallelExecution in ThisBuild := false
 fork := true // required for javaOptions to be passed
@@ -36,17 +36,15 @@ Revolver.settings
 
 
 lazy val versions = new {
-  val finatra = "2.8.0"
-  val guice = "4.0"
+  val finatra = "2.13.0"
+  val guice = "4.1.0"
   val logback = "1.1.7"
   val mockito = "1.9.5"
-  val scalatest = "3.0.1"
+  val scalatest = "3.0.4"
   val scalacheck = "1.13.4"
   val specs2 = "2.4.17"
 
-  val circe = "0.5.1"
-  val metricsCore = "3.1.2"
-  val finagleMetrics = "0.0.3"
+  val circe = "0.9.0-M1"
 }
 
 libraryDependencies ++= Seq(
@@ -54,20 +52,20 @@ libraryDependencies ++= Seq(
   "com.twitter" %% "finatra-httpclient" % versions.finatra,
   "ch.qos.logback" % "logback-classic" % versions.logback,
 
-  "com.twitter" %% "finatra-http" % versions.finatra % Test,
-  "com.twitter" %% "finatra-jackson" % versions.finatra % Test,
-  "com.twitter" %% "inject-server" % versions.finatra % Test,
-  "com.twitter" %% "inject-app" % versions.finatra % Test,
-  "com.twitter" %% "inject-core" % versions.finatra % Test,
-  "com.twitter" %% "inject-modules" % versions.finatra % Test,
-  "com.google.inject.extensions" % "guice-testlib" % versions.guice % Test,
+  "com.twitter" %% "finatra-http" % versions.finatra % "test",
+  "com.twitter" %% "finatra-jackson" % versions.finatra % "test",
+  "com.twitter" %% "inject-server" % versions.finatra % "test",
+  "com.twitter" %% "inject-app" % versions.finatra % "test",
+  "com.twitter" %% "inject-core" % versions.finatra % "test",
+  "com.twitter" %% "inject-modules" % versions.finatra % "test",
+  "com.google.inject.extensions" % "guice-testlib" % versions.guice % "test",
 
-  "com.twitter" %% "finatra-http" % versions.finatra % Test classifier "tests",
-  "com.twitter" %% "finatra-jackson" % versions.finatra % Test classifier "tests",
-  "com.twitter" %% "inject-server" % versions.finatra % Test classifier "tests",
-  "com.twitter" %% "inject-app" % versions.finatra % Test classifier "tests",
-  "com.twitter" %% "inject-core" % versions.finatra % Test classifier "tests",
-  "com.twitter" %% "inject-modules" % versions.finatra % Test classifier "tests",
+  "com.twitter" %% "finatra-http" % versions.finatra % "test" classifier "tests",
+  "com.twitter" %% "finatra-jackson" % versions.finatra % "test" classifier "tests",
+  "com.twitter" %% "inject-server" % versions.finatra % "test" classifier "tests",
+  "com.twitter" %% "inject-app" % versions.finatra % "test" classifier "tests",
+  "com.twitter" %% "inject-core" % versions.finatra % "test" classifier "tests",
+  "com.twitter" %% "inject-modules" % versions.finatra % "test" classifier "tests",
 
   "org.mockito" % "mockito-core" % versions.mockito % Test,
   "org.scalacheck" %% "scalacheck" % versions.scalacheck % Test,
@@ -78,9 +76,5 @@ libraryDependencies ++= Seq(
 libraryDependencies ++= Seq(
   "io.circe" %% "circe-core" % versions.circe,
   "io.circe" %% "circe-generic" % versions.circe,
-  "io.circe" %% "circe-parser" % versions.circe,
-
-  "com.github.rlazoti" %% "finagle-metrics" % versions.finagleMetrics,
-  "io.dropwizard.metrics" % "metrics-core" % versions.metricsCore,
-  "io.dropwizard.metrics" % "metrics-graphite" % versions.metricsCore
+  "io.circe" %% "circe-parser" % versions.circe
 )
